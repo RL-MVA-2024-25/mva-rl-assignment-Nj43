@@ -97,7 +97,7 @@ class ProjectAgent:
 
     def load(self):
         self.model = DQN(self.state_dim, self.nb_neurons, self.nb_actions).to(device)
-        self.model.load_state_dict(torch.load("model_dqn.pt", map_location=device))
+        self.model.load_state_dict(torch.load("src/model_dqn.pt", map_location=device))
         self.model.eval()
         
     def greedy_action(self, network, state):
