@@ -32,7 +32,7 @@ config = {'nb_actions': env.action_space.n,
           'epsilon_decay_period': 10000,
           'epsilon_delay_decay': 100,
           'batch_size': 800,
-          'gradient_steps': 1,
+          'gradient_steps': 3,
           'update_target_strategy': 'replace', # or 'ema'
           'update_target_freq': 200,
           'update_target_tau': 0.005,
@@ -97,7 +97,7 @@ class ProjectAgent:
 
     def load(self):
         self.model = DQN(self.state_dim, self.nb_neurons, self.nb_actions).to(device)
-        self.model.load_state_dict(torch.load("model_dqn.pt", map_location=device))
+        self.model.load_state_dict(torch.load("src/model_dqn.pt", map_location=device))
         self.model.eval()
         
     def greedy_action(self, network, state):
@@ -203,13 +203,6 @@ class DQN(nn.Module):
         return res
 
 
-
-if __name__ == "__main__":
-
-    agent = ProjectAgent()
-
-    print("Starting training...")
-    episode_returns = agent.train()
 
 
 
